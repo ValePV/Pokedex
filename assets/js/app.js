@@ -1,94 +1,60 @@
-
- $(document).ready(function(){
-
-  for(var i = 1; i <= 100; i++){
+$(document).ready(function() {
+  for (var i = 1; i <= 100; i++) {
     $('#pokemon').append('<div class="contain-poke"><img id="' 
       + i + '" src="http://pokeapi.co/media/img/' + i + '.png"></div>');
   }
-})
+});
 
 var search = document.getElementById('search');
-var poke_name = document.getElementById('poke_name');
+var pokeName = document.getElementById('poke_name');
 
-search.addEventListener('click', function(){
-fetch("https://pokeapi.co/api/v2/pokemon/"+poke_name.value+"/")
-  .then(function(response) {
-   //Turns the the JSON into a JS object
-   return response.json();
-   
- })
- .then(function(data) {
-   let name = data.name;
-   let numb = data.id;
-   let ability = [];
-   let stat = [];
+search.addEventListener('click', function() {
+  fetch('https://pokeapi.co/api/v2/pokemon/' + pokeName.value + '/')
+    .then(function(response) {
+      // Turns the the JSON into a JS object
+      return response.json();
+    })
+    .then(function(data) {
+      let name = data.name;
+      let numb = data.id;
+      let ability = [];
+      let stat = [];
 
-   for (let i = 0; i<data.abilities.length; i++){
-    ability.push(data.abilities[i].ability.name);
-   }
-   for (let i = 0; i<data.stats.length; i++){
-    stat.push(data.stats[i].stat.name);
-   }
-   $('#pokemon').hide();
-   $('.my_pokemon').append('<div class="cont-pokedex"><div class="cont-img">'
-    + '<img src="http://pokeapi.co/media/img/' + numb
-    + '.png"/></div><h2 class="text-center tittle-pokem">'
-    + name + numb + '</h2><h3 class="text-center">Ability</h3><p>' + ability[0] 
-    + '</p><p>' + ability[1] + '</p><h3 class="text-center">Stats</h3><p>' + stat[0] 
-    + '</p><p>' + stat[1] + '</p><p class="other"></p></div>');
-
-
-  /*return fetch("https://pokeapi.co/api/v2/pokemon-species/" + poke_name.value +"/");*/
-
-/*fetch('flowers.jpg').then(function(response) {
-   data1 = response.blob();
- return response.blob();
-}).then(function(myBlob) {
- var objectURL = URL.createObjectURL(myBlob);
- myImage.src = objectURL;
- return fetch('chair.jpg');
-}).then(function(response){
-   return response.blob();
-}).then(function(myBlob){
-
-}).catch(function(error){
-
-});*/
-/* })
- .then(function(data1) {
+      for (let i = 0; i < data.abilities.length; i++) {
+        ability.push(data.abilities[i].ability.name);
+      }
+      for (let i = 0; i < data.stats.length; i++) {
+        stat.push(data.stats[i].stat.name);
+      }
+      $('#pokemon').hide();
+      $('.my_pokemon').append('<div class="cont-pokedex"><div class="cont-img">'
+      + '<img src="http://pokeapi.co/media/img/' + numb
+      + '.png"/></div><h2 class="text-center tittle-pokem">'
+      + name + numb + '</h2><h3 class="text-center">Ability</h3><p>' + ability[0] 
+      + '</p><p>' + ability[1] + '</p><h3 class="text-center">Stats</h3><p>' + stat[0] 
+      + '</p><p>' + stat[1] + '</p><p class="other"></p></div>');
+    });
+});
+/* return fetch("https://pokeapi.co/api/v2/pokemon-species/" + poke_name.value +"/"); */
+/* fetch('flowers.jpg').then(function(response) {
+    data1 = response.blob();
+    return response.blob();
+    }).then(function(myBlob) {
+    var objectURL = URL.createObjectURL(myBlob);
+    myImage.src = objectURL;
+    return fetch('chair.jpg');
+    }).then(function(response){
+    return response.blob();
+    }).then(function(myBlob){
+    }).catch(function(error){
+    }); 
+  })
+  .then(function(data1) {
   let habit = data1.habitat;
   console.log(habit);
   $('.other').append('<p>' + habit + '</p>');
- })*/
-
-});
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*let display = document.querySelector('.list-of-pokemons');
+})*/
+/* let display = document.querySelector('.list-of-pokemons');
 
 fetch('https://pokeapi.co/api/v2/pokemon/?limit=949')
 .then(function(response) {
@@ -96,23 +62,23 @@ fetch('https://pokeapi.co/api/v2/pokemon/?limit=949')
   return response.json();
 })
 .then(function(data) {*/
-  /*console.log(data);*/
-  //mostrar lista de pokemones
-  /*const infPokem = ('https://pokeapi.co/api/v2/pokemon-form/1/').val();
+/* console.log(data);*/
+// mostrar lista de pokemones
+/* const infPokem = ('https://pokeapi.co/api/v2/pokemon-form/1/').val();
   console.log(infPokem);
   for (var i = 0; i < infPokem.length; i++) {
     $(".list-of-pokemons").append("<h2>" + infPokem[i].name + "</h2>");
   }*/
-   //display =`<h2>${data.name}</h2>`
-  //Let's make some HTML!
- /* let html = `<h2><a href="${data.html_url}">${data.login}</a></h2>
+// display =`<h2>${data.name}</h2>`
+// Let's make some HTML!
+/* let html = `<h2><a href="${data.html_url}">${data.login}</a></h2>
     <p>${data.name}</p>
     <p>Followers: ${data.followers}</p>
   `;
-//img pokeapi.co/media/sprites/pokemon/2.png
+// img pokeapi.co/media/sprites/pokemon/2.png
   //Put that HTML on the page
   display.innerHTML = html;*/
-//});
+// });
 /*
 const infPokem = ('https://pokeapi.co/api/v2/pokemon/?limit=949').val();
 
@@ -127,7 +93,7 @@ function pokeSubmit() {
     var pokeURL = "https://pokeapi.co/api/v2/pokemon/" + param + "/";
     var pokeURL2 = "https://pokeapi.co/api/v2/pokemon/" + param + "/";*/
 
-    /*$.getJSON(pokeURL, function(data){
+/* $.getJSON(pokeURL, function(data){
         //console.log(data);
         var pokeID = data.national_id;
         var pokeName = data.name;
@@ -157,7 +123,6 @@ function pokeSubmit() {
             console.log("Description URI: ", descriptionURI);
             console.log("Description: ", pokeDescription);
             console.log("Image URI: ", imageURI);
-*/
-        
+*/     
 
    
