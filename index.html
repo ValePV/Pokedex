@@ -5,75 +5,45 @@
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <title>Pokedex</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="assets/css/main.css">
 </head>
-<header>
-  <div class="row">
-    <div class="col-lg-6">
-      <img src="assets/images/logo.png">
-    </div>
-    <div class="col-lg-4 col-lg-offset-1">
-      <div class="input-group">
-        <input type="text" id="poke_name" class="form-control" placeholder="Ingresa nombre o número de tu Pokemón">
-        <span class="input-group-btn">
-          <button class="btn btn-default"  id="search" type="button">Go!</button>
-        </span>
-      </div><!-- /input-group -->
-    </div>
-  </div>
-  
-</header>
-<section>
-  <div class="row container-fluid">
-    <div class="col-lg-12" id="pokemon">
-    </div>
-  </div>
-</section>
-<section>
-  <div class="container">
+<body>
+  <header>
     <div class="row">
-      <div class="col-lg-8 col-lg-offset-3">
-        <div class="my_pokemon"></div>
+      <div class="col-lg-6">
+        <img class="logo" src="assets/images/Pokedex_logo.png">
       </div>
+      <div class="col-lg-4 col-lg-offset-1">
+        <div class="input-group">
+          <input type="text" id="poke_name" class="form-control" placeholder="Ingresa nombre o número de tu Pokemón">
+          <span class="input-group-btn">
+            <button class="btn btn-default"  id="search" type="button">Go!</button>
+          </span>
+        </div><!-- /input-group -->
+      </div>
+    </div>
     
-    </div>
-  </div>
-</section>
-
-
-<!--
-  <div data-role="page" id="pokeSearch-page">
-    <div data-role="header" data-theme="b">
-      <h1>Pokeapi Demos</h1>
-    </div>
-    <div data-role="main" class="ui-content">
-      <form id="pokeForm" action="#pokeDetails-page" method="post">
-        <div>
-          <label for="pokeInput">Pokemon name or number:
-          <input type="text" name="pokeInput" id="pokeInput" placeholder="Name/Number" value="">
-        </div>
-        <br>
-        <div>
-          <a class="ui-btn" onclick="pokeSubmit()">Search</a>
-        </div>
-      </form>
-      <div>
-        <ul data-role="listview" data-inset="true" id="pokeDetails">
-        </ul>
-      </div>
-    </div>
-  </div>-->
-  <!--<header class="">
-    <h1>Pokédex</h1>
   </header>
-  <section class="root container-fluid">
-    <div class="list-of-pokemons">
-        
+  <section>
+    <div class="row">
+      <div class="col-md-12" id="pokemon">
+      </div>
     </div>
   </section>
-  <section id="pokeDetail" class="modal fade" role="dialog">
+  <section>
+    <div class="contain">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="my_pokemon"></div>
+        </div>
+      
+      </div>
+    </div>
+  </section>
 
-  </section>-->
+
+
 
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <!-- Latest compiled and minified JavaScript -->

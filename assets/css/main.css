@@ -1,40 +1,84 @@
 body{
-  background-color: #262626;
+  /*background-color: #262626;*/
+  background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+
 }
 header{
-  background-color: #b20700;
   border-bottom: 5px solid white;
 }
+.logo{
+  margin:15px 0px 15px 60px;
+  cursor: pointer;
+}
+
 .input-group{
-  margin-top: 90px;
+  margin-top: 110px;
 }
 .contain-poke{
+  background-image: url(../images/pokebola_meme_by_vechta-d4f0gnw.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 200px;
+  height: 200px;
+  margin-left: 45px;
+  margin-top:20px;
   display: inline-block;
+  
+  /*
   border:7px solid #b20700;
   border-radius: 50%;
   width: 140px;
   height: 140px;
   margin: 10px;
-  background-color: #fbfbfb;
+  background-color: #fbfbfb;*/
 }
-.cont-pokedex{
-  display: inline-block;
-  border:5px solid white;
-  margin-top: 60px;
+
+.img-pokemon{
+  margin-left: 40px;
+  margin-top: 35px;
+  cursor: pointer;
 }
+
 .cont-img{
-  display: inline-block;
-  border: 5px solid white;
-  border-radius: 50%;
-  margin: 40px 60px;
-  background-color: #b20700;
+  background-image: url(../images/pokebola_meme_by_vechta-d4f0gnw.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 200px;
+  height: 200px;
+  margin-top:20px;
+}
+
+.img-poke-info{
+  margin-left: 40px;
+  margin-top: 35px;
+}
+
+.contain-info{
+  outline: 1px solid #fff;
+  margin:10px 0px 10px 0px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 h2{
-  color: white;
-  margin:20px;
+  font-family: 'Roboto';
+  text-transform: capitalize;
 }
-p{
-  color: white;
-  text-align: center;
+
+h5{
+  margin:0px;
+  font-family: 'Roboto';
+  text-transform: capitalize;
+  color: #fff;
 }
+
+.panel-pokemon{
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 20px;
+  border-radius: 2%;
+  border: 1px solid #fff;
+  opacity: 0.8;
+
+}
+

@@ -1,9 +1,185 @@
 $(document).ready(function() {
   for (var i = 1; i <= 100; i++) {
-    $('#pokemon').append('<div class="contain-poke"><img id="' 
-      + i + '" src="http://pokeapi.co/media/img/' + i + '.png"></div>');
+    $('#pokemon').append('<div class="contain-poke"><img class="img-pokemon" id="' 
+      + i + '" data-id="'+ i +'" src="http://pokeapi.co/media/img/' + i + '.png"><span class="hidden" id="pokId">'
+      + i + '</span></div>');
   }
+  
+  var pokId 
+  
+  $('.img-pokemon').click(function(){
+    var pokId = $(this).data("id")
+   // console.log(pokId);
+    fetch('https://pokeapi.co/api/v2/pokemon/' + pokId + '/')
+    .then(function(response) {
+      // Turns the the JSON into a JS object
+      return response.json();
+    })
+    .then(function(data) {
+      console.log(data);
+      let name = data.name;
+      let numb = data.id;
+      let weight = data.weight;
+      let type = [];
+      let ability = [];
+      let stat = [];
+      let move = [];
+      
+      for (let i = 0; i < data.moves.length; i++) {
+        move.push(data.moves[i].move.name);
+      }
+
+      for (let i = 0; i < data.types.length; i++) {
+        type.push(data.types[i].type.name);
+      }
+      
+      for (let i = 0; i < data.abilities.length; i++) {
+        ability.push(data.abilities[i].ability.name);
+      }
+      for (let i = 0; i < data.stats.length; i++) {
+        stat.push(data.stats[i].stat.name);
+      }
+      $('#pokemon').hide();
+      $('.my_pokemon').append('<div class="cont-pokedex row">'
+        + '<div class="col-md-8 col-md-offset-2">'
+        + '<div class="row panel-pokemon">'
+        + '<div class="col-md-3">'
+        +   '<h2 class="text-center tittle-pokem">' + name + '</h2>'
+        +   '<div class="cont-img">'
+        +     '<img class="img-poke-info" src="http://pokeapi.co/media/img/' + numb + '.png"/>'
+        +   '</div>'
+        + '</div>'
+        + '<div class="col-md-3 contain-details">'
+        +   '<div class="row descrip contain-info">' 
+        +   '</div>'
+        +   '<div class="row contain-info">' 
+        +     '<div class="col-md-4">'
+        +       '<h5> Number </h5>'
+        +     '</div>'
+        +     '<div class="col-md-8">'
+        +       '<h5>' + numb + '</h5>'
+        +     '</div>'
+        +   '</div>'
+        +   '<div class="row contain-info">' 
+        +     '<div class="col-md-4">'
+        +       '<h5> Weight </h5>'
+        +     '</div>'
+        +     '<div class="col-md-8">'
+        +       '<h5>' + weight + '</h5>'
+        +     '</div>'
+        +   '</div>'
+        +   '<div class="row habit contain-info">' 
+        +   '</div>'
+        + '</div>'
+        + '<div class="col-md-3 contain-details">'
+        +   '<div class="row color contain-info">' 
+        +   '</div>'
+        +   '<div class="row contain-info">' 
+        +     '<div class="col-md-4">'
+        +       '<h5> Ability </h5>'
+        +     '</div>'
+        +     '<div class="col-md-8">'
+        +       '<h5>' + ability[0] + '</h5><h5>' + ability[1] + '</h5>'
+        +     '</div>'
+        +   '</div>'
+        +   '<div class="row contain-info">' 
+        +     '<div class="col-md-4">'
+        +       '<h5> Type </h5>'
+        +     '</div>'
+        +     '<div class="col-md-8">'
+        +       '<h5>' + type[0] + '</h5><h5>' + type[1] + '</h5>'
+        +     '</div>'
+        +   '</div>'
+        + '</div>'
+        + '<div class="col-md-3 contain-details">'
+        +   '<div class="row contain-info">' 
+        +     '<div class="col-md-4">'
+        +       '<h5> Stats </h5>'
+        +     '</div>'
+        +     '<div class="col-md-8">'
+        +       '<h5>' + stat[0] + '</h5><h5>' + stat[1] + '</h5>'
+        +       '<h5>' + stat[2] + '</h5>'
+        +     '</div>'
+        +   '</div>'
+        +   '<div class="row contain-info">' 
+        +     '<div class="col-md-4">'
+        +       '<h5> Moves </h5>'
+        +     '</div>'
+        +     '<div class="col-md-8">'
+        +       '<h5>' + move[0] + '</h5><h5>' + move[1] + '</h5>'
+        +       '<h5>' + move[2] + '</h5>'
+        +       '<h5>' + move[3] + '</h5><h5>' + move[4] + '</h5>'
+        +     '</div>'
+        +   '</div>'
+        + '</div>'
+        + '</div>'
+        + '</div>'
+        +'</div>');
+    });
+
+    /* return fetch("https://pokeapi.co/api/v2/pokemon-species/" + poke_name.value +"/"); */
+  fetch('https://pokeapi.co/api/v2/pokemon-species/' + pokId +'/')
+    .then(function(response) {
+    //Convierte el texto en formato JSON en un objeto JS
+      return response.json();
+    })
+    .then(function(data) {
+      console.log(data);
+
+      let color = data.color.name;
+      let habitat = data.habitat.name;
+      
+
+      $('.habit').append('<div class="col-md-4">'
+          +         '<h5> Habitat </h5>'
+          +       '</div>'
+          +       '<div class="col-md-8">'
+          +         '<h5>' + habitat + '</h5></div>');
+
+      $('.color').append('<div class="col-md-4">'
+          +         '<h5> Color </h5>'
+          +       '</div>'
+          +       '<div class="col-md-8">'
+          +         '<h5>' + color + '</h5></div>');
+
+      //$('.panel-pokemon').css("background-color",'"' + color + '"' );
+      $('.panel-pokemon').css("background-color", color );
+
+    })
+
+
+
+
+  fetch('https://pokeapi.co/api/v2/characteristic/' + pokId +'/')
+    .then(function(response) {
+    //Convierte el texto en formato JSON en un objeto JS
+      return response.json();
+    })
+    .then(function(data) {
+      console.log(data);
+      let description = [];
+
+      for (let i = 0; i < data.descriptions.length; i++) {
+          description.push(data.descriptions[i].description);
+      }
+
+      $('.descrip').append('<div class="col-md-12">'
+          + '<h5 class="text-center">' + description[0] + '</h5><h5 class="text-center">' + description[1] + '</h5>'
+          +'</div>');
+      
+
+                        
+
+
+    })
+  })
+
 });
+
+
+
+  
+
 
 var search = document.getElementById('search');
 var pokeName = document.getElementById('poke_name');
@@ -15,11 +191,23 @@ search.addEventListener('click', function() {
       return response.json();
     })
     .then(function(data) {
+      console.log(data);
       let name = data.name;
       let numb = data.id;
+      let weight = data.weight;
+      let type = [];
       let ability = [];
       let stat = [];
+      let move = [];
+      
+      for (let i = 0; i < data.moves.length; i++) {
+        move.push(data.moves[i].move.name);
+      }
 
+      for (let i = 0; i < data.types.length; i++) {
+        type.push(data.types[i].type.name);
+      }
+      
       for (let i = 0; i < data.abilities.length; i++) {
         ability.push(data.abilities[i].ability.name);
       }
@@ -27,102 +215,147 @@ search.addEventListener('click', function() {
         stat.push(data.stats[i].stat.name);
       }
       $('#pokemon').hide();
-      $('.my_pokemon').append('<div class="cont-pokedex"><div class="cont-img">'
-      + '<img src="http://pokeapi.co/media/img/' + numb
-      + '.png"/></div><h2 class="text-center tittle-pokem">'
-      + name + numb + '</h2><h3 class="text-center">Ability</h3><p>' + ability[0] 
-      + '</p><p>' + ability[1] + '</p><h3 class="text-center">Stats</h3><p>' + stat[0] 
-      + '</p><p>' + stat[1] + '</p><p class="other"></p></div>');
+      $('.my_pokemon').append('<div class="cont-pokedex row">'
+        + '<div class="col-md-8 col-md-offset-2">'
+        + '<div class="row panel-pokemon">'
+        + '<div class="col-md-3">'
+        +   '<h2 class="text-center tittle-pokem">' + name + '</h2>'
+        +   '<div class="cont-img">'
+        +     '<img class="img-poke-info" src="http://pokeapi.co/media/img/' + numb + '.png"/>'
+        +   '</div>'
+        + '</div>'
+        + '<div class="col-md-3 contain-details">'
+        +   '<div class="row descrip contain-info">' 
+        +   '</div>'
+        +   '<div class="row contain-info">' 
+        +     '<div class="col-md-4">'
+        +       '<h5> Number </h5>'
+        +     '</div>'
+        +     '<div class="col-md-8">'
+        +       '<h5>' + numb + '</h5>'
+        +     '</div>'
+        +   '</div>'
+        +   '<div class="row contain-info">' 
+        +     '<div class="col-md-4">'
+        +       '<h5> Weight </h5>'
+        +     '</div>'
+        +     '<div class="col-md-8">'
+        +       '<h5>' + weight + '</h5>'
+        +     '</div>'
+        +   '</div>'
+        +   '<div class="row habit contain-info">' 
+        +   '</div>'
+        + '</div>'
+        + '<div class="col-md-3 contain-details">'
+        +   '<div class="row color contain-info">' 
+        +   '</div>'
+        +   '<div class="row contain-info">' 
+        +     '<div class="col-md-4">'
+        +       '<h5> Ability </h5>'
+        +     '</div>'
+        +     '<div class="col-md-8">'
+        +       '<h5>' + ability[0] + '</h5><h5>' + ability[1] + '</h5>'
+        +     '</div>'
+        +   '</div>'
+        +   '<div class="row contain-info">' 
+        +     '<div class="col-md-4">'
+        +       '<h5> Type </h5>'
+        +     '</div>'
+        +     '<div class="col-md-8">'
+        +       '<h5>' + type[0] + '</h5><h5>' + type[1] + '</h5>'
+        +     '</div>'
+        +   '</div>'
+        + '</div>'
+        + '<div class="col-md-3 contain-details">'
+        +   '<div class="row contain-info">' 
+        +     '<div class="col-md-4">'
+        +       '<h5> Stats </h5>'
+        +     '</div>'
+        +     '<div class="col-md-8">'
+        +       '<h5>' + stat[0] + '</h5><h5>' + stat[1] + '</h5>'
+        +       '<h5>' + stat[2] + '</h5>'
+        +     '</div>'
+        +   '</div>'
+        +   '<div class="row contain-info">' 
+        +     '<div class="col-md-4">'
+        +       '<h5> Moves </h5>'
+        +     '</div>'
+        +     '<div class="col-md-8">'
+        +       '<h5>' + move[0] + '</h5><h5>' + move[1] + '</h5>'
+        +       '<h5>' + move[2] + '</h5>'
+        +       '<h5>' + move[3] + '</h5><h5>' + move[4] + '</h5>'
+        +     '</div>'
+        +   '</div>'
+        + '</div>'
+        + '</div>'
+        + '</div>'
+        +'</div>');
     });
-});
+
 /* return fetch("https://pokeapi.co/api/v2/pokemon-species/" + poke_name.value +"/"); */
-/* fetch('flowers.jpg').then(function(response) {
-    data1 = response.blob();
-    return response.blob();
-    }).then(function(myBlob) {
-    var objectURL = URL.createObjectURL(myBlob);
-    myImage.src = objectURL;
-    return fetch('chair.jpg');
-    }).then(function(response){
-    return response.blob();
-    }).then(function(myBlob){
-    }).catch(function(error){
-    }); 
-  })
-  .then(function(data1) {
-  let habit = data1.habitat;
-  console.log(habit);
-  $('.other').append('<p>' + habit + '</p>');
-})*/
-/* let display = document.querySelector('.list-of-pokemons');
-
-fetch('https://pokeapi.co/api/v2/pokemon/?limit=949')
-.then(function(response) {
+fetch('https://pokeapi.co/api/v2/pokemon-species/' + poke_name.value +'/')
+  .then(function(response) {
   //Convierte el texto en formato JSON en un objeto JS
-  return response.json();
-})
-.then(function(data) {*/
-/* console.log(data);*/
-// mostrar lista de pokemones
-/* const infPokem = ('https://pokeapi.co/api/v2/pokemon-form/1/').val();
-  console.log(infPokem);
-  for (var i = 0; i < infPokem.length; i++) {
-    $(".list-of-pokemons").append("<h2>" + infPokem[i].name + "</h2>");
-  }*/
-// display =`<h2>${data.name}</h2>`
-// Let's make some HTML!
-/* let html = `<h2><a href="${data.html_url}">${data.login}</a></h2>
-    <p>${data.name}</p>
-    <p>Followers: ${data.followers}</p>
-  `;
-// img pokeapi.co/media/sprites/pokemon/2.png
-  //Put that HTML on the page
-  display.innerHTML = html;*/
-// });
-/*
-const infPokem = ('https://pokeapi.co/api/v2/pokemon/?limit=949').val();
+    return response.json();
+  })
+  .then(function(data) {
+    console.log(data);
 
-for ( i = 0; i < infPokem.length ; i++ ){
-  $('.img-Pkem').append("<span class'sect-otherest1'><a href='BAR1-KrossBar-Bar'><div class='rest'>" +
-  "<a href='#modal-restDescription' data-toggle='modal'><img class='restim' src='assets/images/"
-  + places[i]['img'] + "'></a>" +
-  "</div></a></>");*/
-/*
-function pokeSubmit() {
-    var param = document.getElementById("pokeInput").value;
-    var pokeURL = "https://pokeapi.co/api/v2/pokemon/" + param + "/";
-    var pokeURL2 = "https://pokeapi.co/api/v2/pokemon/" + param + "/";*/
+    let color = data.color.name;
+    let habitat = data.habitat.name;
+    
 
-/* $.getJSON(pokeURL, function(data){
-        //console.log(data);
-        var pokeID = data.national_id;
-        var pokeName = data.name;
-        var pokeType1 = data.types[0].name;
-        if (data.types.length == 2) {
-            var pokeType2 = data.types[1].name;
-        }
-        else var pokeType2 = null;
-        var descriptionURI = "http://pokeapi.co" + data.descriptions[0].resource_uri;
-        var pokeDescription = "";*/
-/*
-        $.getJSON(descriptionURI, function(data2){
-            //console.log(data2);
-            pokeDescription = data2.description;
-        });
+    $('.habit').append('<div class="col-md-4">'
+        +         '<h5> Habitat </h5>'
+        +       '</div>'
+        +       '<div class="col-md-8">'
+        +         '<h5>' + habitat + '</h5></div>');
 
-        $.getJSON(pokeURL2, function(data3){
-            //console.log(data3);
+    $('.color').append('<div class="col-md-4">'
+        +         '<h5> Color </h5>'
+        +       '</div>'
+        +       '<div class="col-md-8">'
+        +         '<h5>' + color + '</h5></div>');
 
-             //console.log(JSON.stringify(data, null, "  "));
-            var imageURI = data3.sprites.front_default;
+    //$('.panel-pokemon').css("background-color",'"' + color + '"' );
+    $('.panel-pokemon').css("background-color", color );
 
-            console.log("Number: ", pokeID);
-            console.log("Name: ", pokeName);
-            console.log("Type 1: ", pokeType1);
-            console.log("Type 2: ", pokeType2);
-            console.log("Description URI: ", descriptionURI);
-            console.log("Description: ", pokeDescription);
-            console.log("Image URI: ", imageURI);
-*/     
+  })
+
+
+
+
+fetch('https://pokeapi.co/api/v2/characteristic/' + poke_name.value +'/')
+  .then(function(response) {
+  //Convierte el texto en formato JSON en un objeto JS
+    return response.json();
+  })
+  .then(function(data) {
+    console.log(data);
+    let description = [];
+
+    for (let i = 0; i < data.descriptions.length; i++) {
+        description.push(data.descriptions[i].description);
+    }
+
+    $('.descrip').append('<div class="col-md-12">'
+        + '<h5 class="text-center">' + description[0] + '</h5><h5 class="text-center">' + description[1] + '</h5>'
+        +'</div>');
+    
+
+                      
+
+
+  })
+
+
+
+});
+
+$('.logo').click(function(){
+      location.reload();
+
+});
+   
 
    
