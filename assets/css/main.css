@@ -82,3 +82,22 @@ h5{
 
 }
 
+@media (max-width: 768px) { 
+  .logo{
+    margin:15px 0px 15px 60px;
+    width: 300px;
+    cursor: pointer;
+  }
+
+  .input-group{
+    margin-top: 30px;
+    margin-bottom:10px;
+  }
+  
+  .panel-pokemon{
+    margin-left: 30px;
+    padding: 10px;
+  }
+}
+
+
